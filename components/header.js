@@ -19,35 +19,45 @@ import {
   Divider,
   Heading,
   HamburgerIcon,
+  Link,
 } from "native-base";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Animated, color } from "react-native-reanimated";
 
-
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Tab = createMaterialTopTabNavigator();
 
-const Header = () => {
+const Header = ({ navigation }) => {
   const [tabactive, setTabactive] = useState({
     first: true,
     second: false,
     third: false,
   });
   return (
+    <NativeBaseProvider>
     <View>
       <View style={styles.header}>
         <View style={styles.row}>
-          <View style={styles.col1}>
+          <View style={styles.col1} onPress={() => navigation.navigate('SplashScreen')}>
+            <Button onPress={() => navigation.navigate('SplashScreen')}>
+
             <HamburgerIcon size="xl" color="#ffffff" />
+            </Button>
+           
           </View>
           <View style={styles.col2}>
+          
             <Center>
               <Image
                 style={styles.tinyLogo}
                 source={require("../assets/logo.png")}
               />
+             
             </Center>
+           
           </View>
           <View style={styles.col1}></View>
         </View>
@@ -133,6 +143,7 @@ const Header = () => {
       {(tabactive.third)?<>Commeriacal</>:null}
       </View>
     </View>
+    </NativeBaseProvider>
    
   );
 };
